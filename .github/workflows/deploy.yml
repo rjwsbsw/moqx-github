@@ -4,11 +4,11 @@
 name: 🚀 Deploy moqx to Azure
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - 'README.md'
-      - 'docs/**'
+#   push:
+#     branches: [main]
+#     paths-ignore:
+#       - 'README.md'
+#       - 'docs/**'
   workflow_dispatch:  # Manuell auslösbar für Tests
     inputs:
       environment:
@@ -82,7 +82,9 @@ jobs:
         echo "Testing image: $LATEST_IMAGE"
         
         # Container 5 Sekunden laufen lassen
-        timeout 10s docker run --rm $LATEST_IMAGE || {
+        timeout 10s docker run --rm \
+          -e DATABASE_URL="sqlite:///test.db" \
+          $LATEST_IMAGE || {
           if [ $? -eq 124 ]; then
             echo "✅ Container startet erfolgreich (Timeout erreicht)"
           else

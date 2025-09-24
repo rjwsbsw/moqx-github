@@ -6,7 +6,7 @@
 WEBAPP_NAME="moqxapp"
 
 # Namen und Region
-RESOURCE_GROUP="saengercontainer"
+RESOURCE_GROUP="${RESOURCE_GROUP:-saengercontainer}"
 REGION="germanywestcentral"
 PLAN_NAME="appsvc_linux_${REGION}"
 
@@ -22,8 +22,12 @@ SQL_ADMIN_USER="saengeradmin"
 SQL_ADMIN_PASSWORD="a9?w!5HA?UCTZxH"  # Am besten als Umgebungsvariable!
 SQL_DB_NAME="quizdb01"
 SQL_DB_CONN_STR="mssql+pymssql://${SQL_ADMIN_USER}:${SQL_ADMIN_PASSWORD}@${SQL_SERVER_NAME}.database.windows.net:1433/${SQL_DB_NAME}"
-
-
+SQL_ADMIN_PASSWORD="${SQL_ADMIN_PASSWORD:-}"
+# Fehlerbehandlung für fehlende Variablen
+if [ -z "$SQL_ADMIN_PASSWORD" ]; then
+  echo "❌ SQL_ADMIN_PASSWORD ist nicht gesetzt!"
+  exit 1
+fi
 ###############################################################################
 # Azure SQL Server konfigurieren
 ###############################################################################
