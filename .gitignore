@@ -1,0 +1,14 @@
+# .gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.env
+.venv/
+venv/
+.DS_Store
+*.log
+.pytest_cache/
+
+# Lokale Azure-Konfiguration
+.azure/
