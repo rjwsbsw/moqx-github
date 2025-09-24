@@ -114,7 +114,7 @@ jobs:
     - name: 🔧 Prepare Deployment Script
       run: |
         # Deploy-Script für GitHub Actions vorbereiten
-        chmod +x ./scripts/deploy-azure.sh
+        chmod +x ./scripts/deploy_to_azure.sh
         
         # Environment Variables exportieren
         export RESOURCE_GROUP="${{ secrets.RESOURCE_GROUP }}"
@@ -125,7 +125,7 @@ jobs:
     
     - name: 🚀 Run Deployment
       run: |
-        ./scripts/deploy-azure.sh
+        ./scripts/deploy_to_azure.sh
       env:
         RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
         SQL_ADMIN_PASSWORD: ${{ secrets.SQL_ADMIN_PASSWORD }}
